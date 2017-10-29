@@ -1,0 +1,12 @@
+web-frontend:
+  command: npm run prod
+  environment:
+    - NODE_ENV=production
+    - NODE_PATH=.
+    - PORT=3000
+  image: 'lowside/web-frontend:latest'
+  ports:
+    - '10001:3000'
+  tags:
+    - production
+    - side-projects
