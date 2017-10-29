@@ -1,0 +1,24 @@
+File Edit Options Buffers Tools Help
+server {
+       listen 443 ssl;
+       server_name api.lowside.io;
+       access_log /var/log/nginx/aksels.me.log;
+
+       ssl_certificate /etc/letsencrypt/live/lowside.io/fullchain.pem;
+       ssl_certificate_key /etc/letsencrypt/live/lowside.io/privkey.pem;
+
+       location / {
+               proxy_pass http://localhost:10002;
+        }
+}
+
+server {
+       listen 80;
+       server_name api.lowside.io;
+
+       location /.well-known/acme-challenge {
+                root /var/www/letsencrypt;
+        }
+
+       return 301 https://$host$request_uri;
+}
